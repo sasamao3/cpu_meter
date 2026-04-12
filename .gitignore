@@ -1,0 +1,35 @@
+# Virtual environments
+venv*/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# PyInstaller
+*.manifest
+*.spec
+build/
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Config files (local user settings)
+.cpu_meter_config.json
+~/.cpu_meter_config.json
+
+# OS
+.DS_Store
+Thumbs.db
