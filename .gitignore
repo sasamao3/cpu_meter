@@ -1,7 +1,12 @@
 # Virtual environments
-venv*/
+venv/
+venv_*/
+.venv/
 env/
 ENV/
+/bin/
+/include/
+/lib/
 
 # Python
 __pycache__/
@@ -10,14 +15,38 @@ __pycache__/
 *.so
 *.egg
 *.egg-info/
+.Python
+site-packages/
+distribute_setup.py
+
+# Build and distribution
 dist/
 build/
+*.egg-info/
+.eggs/
 
 # PyInstaller
 *.manifest
-*.spec
-build/
-dist/
+# Note: Keep .spec files as they define the build configuration
+# These are important for reproducible builds
+
+# Testing and profiling (temporary scripts)
+profile_*.py
+analyze_*.py
+measure_*.py
+test_app.sh
+*_test.py
+
+# Temporary files
+*.log
+*.tmp
+/tmp/
+*.swp
+*.swo
+*~
+.cache/
+*.pyo
+*.pyd
 
 # IDE
 .vscode/
@@ -25,11 +54,29 @@ dist/
 *.swp
 *.swo
 *~
+.DS_Store
+.project
+.pydevproject
+.settings/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+*.swp
+Thumbs.db
 
 # Config files (local user settings)
 .cpu_meter_config.json
 ~/.cpu_meter_config.json
 
-# OS
-.DS_Store
-Thumbs.db
+# Local development
+.env
+.local
+*.local
+
+# Backup files
+*.bak
+*.backup
+*~
+*.orig
