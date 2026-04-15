@@ -3,14 +3,22 @@ import time
 import sys
 
 def display_cpu_usage():
-    """Display real-time CPU usage monitor."""
+    """Display real-time CPU usage monitor with optimized startup."""
     try:
         # Initialize CPU percent (first call, non-blocking)
-        psutil.cpu_percent(interval=None)
+        # Use interval=0 for instant response, then switch to 0.1 for smoother updates
+        psutil.cpu_percent(interval=0)
+        
+        update_count = 0
         
         while True:
-            # Get CPU usage percentage (non-blocking for speed)
-            cpu_usage = psutil.cpu_percent(interval=0.1)
+            # First 3 updates use faster interval (0) for snappier UI response
+            # After that, use 0.1s for CPU averaging
+            interval = 0 if update_count < 3 else 0.1
+            
+            cpu_start = time.time()
+            cpu_usage = psutil.cpu_percent(interval=interval)
+            cpu_elapsed = time.time() - cpu_start
             
             # Validate CPU usage value
             if cpu_usage < 0 or cpu_usage > 100:
@@ -28,6 +36,9 @@ def display_cpu_usage():
             print("=== CPU Monitor ===")
             print(f"Usage: [{bar}] {cpu_usage:.1f}%")
             print("Press Ctrl+C to stop.")
+            sys.stdout.flush()
+            
+            update_count += 1
             
     except ImportError:
         print("Error: psutil is not installed. Install it with: pip install psutil")
